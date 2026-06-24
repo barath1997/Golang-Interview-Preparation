@@ -1,0 +1,59 @@
+Concurrent Worker Pool
+Implement a worker pool that processes a slice of integers concurrently, doubling each value and returning them in the original order. Control the number of workers with a parameter.
+
+Timeout with Context
+Write a function that performs a simulated long-running task using time.Sleep, but cancels it using context.WithTimeout. Return an error if the operation times out.
+
+Safe Counter with Mutex
+Implement a Counter type with Inc() and Value() methods that can be safely used from multiple goroutines. Demonstrate its use with several concurrent increments.
+
+Pipeline Pattern
+Build a 3-stage pipeline: generate integers, square them, then filter only even results. Use channels between stages and ensure all goroutines exit cleanly.
+
+Fan-in of Channels
+Given multiple input channels of integers, implement a FanIn function that merges them into a single output channel. Ensure the output channel closes when all inputs are done.
+
+Graceful Goroutine Shutdown
+Start a goroutine that periodically logs a message. Implement a way to stop it gracefully using a done channel or context.Context, and wait for it to finish.
+
+File Line Counter
+Implement a function that takes a filename and returns the number of lines in the file. Handle errors appropriately and write a small main to test it.
+
+Custom Error Type
+Define a custom error type that includes an error code and message. Write a function that returns this error in some cases and demonstrate type assertions on the returned error.
+
+JSON Encoding/Decoding
+Define a struct representing a user (e.g., ID, Name, Email). Write functions to serialize it to JSON and deserialize it back, including error handling for invalid JSON.
+
+HTTP Client with Retries
+Implement an HTTP GET helper that retries a configurable number of times on temporary network errors, with a small delay between attempts.
+
+Generic Map Function (Go 1.18+)
+Write a generic Map function that takes a slice of type T and a function func(T) U and returns a slice of U. Demonstrate it with integers and strings.
+
+Rate Limiter with Ticker
+Implement a simple rate limiter that processes tasks from a channel, but only allows one task every X milliseconds using time.Ticker.
+
+Concurrent Map Aggregation
+Given a slice of strings, count the occurrences of each string using multiple goroutines. Protect shared state correctly and return a map[string]int.
+
+Interface and Struct Composition
+Define an interface Shape with an Area() method and two types Rectangle and Circle that implement it. Write a function that sums areas of a slice of Shape.
+
+Context-Aware HTTP Server Handler
+Implement an HTTP handler that simulates some work and respects request cancellation via r.Context(). Log when the client cancels the request.
+
+Binary Search Implementation
+Implement a binary search function over a sorted slice of integers that returns the index of the target or -1 if not found. Write a main to exercise edge cases.
+
+Command-Line Flags
+Write a small CLI tool using the flag package that accepts a filename and a boolean flag (e.g., -upper). Read the file and optionally transform the content based on the flag.
+
+Worker Pool with Error Propagation
+Extend a worker pool to allow workers to return errors. Collect all errors and results, and ensure the caller knows if any worker failed.
+
+Select with Multiple Channels
+Create two producers sending values at different intervals on two channels. In main, use select to read from both and stop after a certain number of values.
+
+LRU Cache (Simplified)
+Implement a simple LRU cache with Get and Put operations for strings keyed by strings. You may use Go’s built-in data structures to manage order and capacity.
