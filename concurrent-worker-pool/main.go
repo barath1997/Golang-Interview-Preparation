@@ -2,36 +2,42 @@ package main
 
 import "sync"
 
-func worker(jobs chan int, results chan int, wg *sync.WaitGroup) {
+type Job struct {
+	JobID    int
+	JobValue int
+}
+
+func worker(jobs chan Job, arr []int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for ip := range jobs {
-		results <- ip * 2
+		arr[ip.JobID] = ip.JobValue * 2
 	}
 }
 
 func main() {
-	arr := []int{1,2,3,4,5,6,7,8,9,10}
-	jobs := make(chan int)
-	results := make(chan int)
+	arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	jobs := make(chan Job)
+	//results := make(chan int)
 	wg := &sync.WaitGroup{}
 
-	N := 3
-	for i := 1; i <= N; i++ {
+	minWorkers := 3
+	workerCount := min(minWorkers, len(arr)/3)
+	for i := 1; i <= workerCount; i++ {
 		wg.Add(1)
-		go worker(jobs, results, wg)
+		go worker(jobs, arr, wg)
 	}
 
 	go func() {
-		for _, v := range arr {
-			jobs <- v
+		for idx, v := range arr {
+			jobs <- Job{JobID: idx, JobValue: v}
 		}
 		close(jobs)
 	}()
 
-	for res := range results {
-		println(res)
+	wg.Wait()
+
+	for _, val := range arr {
+		println(val)
 	}
 
-	wg.Wait()
-	close(results)
 }
