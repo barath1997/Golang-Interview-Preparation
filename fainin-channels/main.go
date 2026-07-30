@@ -47,17 +47,17 @@ import "sync"
 
 // more clear answer
 func main() {
-    
+
 	wg := &sync.WaitGroup{}
-    odd := make(chan int)
+	odd := make(chan int)
 	even := make(chan int)
-    result := make(chan int)
+	result := make(chan int)
 
 	wg.Add(3)
 
 	go func() {
 		defer wg.Done()
-		for i:=1;i<=10;i+=2 {
+		for i := 1; i <= 10; i += 2 {
 			odd <- i
 		}
 		close(odd)
@@ -65,37 +65,37 @@ func main() {
 
 	go func() {
 		defer wg.Done()
-		for i:=2;i<=10;i+=2 {
+		for i := 2; i <= 10; i += 2 {
 			even <- i
 		}
 		close(even)
 	}()
-    
-	go func() {
-	defer wg.Done()
-	oddOpen,evenOpen := true,true
-	for oddOpen || evenOpen{
-        select {
-		case v1,ok := <-odd:
-			if !ok {
-	            oddOpen = false
-				continue
-			}
-			result <- v1
-        case v2,ok := <-even:
-			if !ok {
-				evenOpen = false
-				continue
-			}
-			result <- v2
-		}
-	}
-	close(result)
-}()
 
-  for res := range result {
-	println(res)
-  }
-  wg.Wait()
+	go func() {
+		defer wg.Done()
+		oddOpen, evenOpen := true, true
+		for oddOpen || evenOpen {
+			select {
+			case v1, ok := <-odd:
+				if !ok {
+					oddOpen = false
+					continue
+				}
+				result <- v1
+			case v2, ok := <-even:
+				if !ok {
+					evenOpen = false
+					continue
+				}
+				result <- v2
+			}
+		}
+		close(result)
+	}()
+
+	for res := range result {
+		println(res)
+	}
+	wg.Wait()
 
 }

@@ -4,13 +4,13 @@ import (
 	"time"
 )
 
-func rateLimit(ch <-chan int) {
+func rateLimit(ch <-chan int, ticker *time.Ticker) {
 
-	// let the 'x' miilliseconds be 500ms
-
+	defer ticker.Stop()
 	for value := range ch {
 		println(value * 2)
-		time.Sleep(time.Millisecond * 500)
+		<-ticker.C
+
 	}
 
 }
@@ -18,7 +18,8 @@ func rateLimit(ch <-chan int) {
 func main() {
 
 	ch := make(chan int)
-	go rateLimit(ch)
+	ticker := time.NewTicker(time.Millisecond * 500)
+	go rateLimit(ch, ticker)
 
 	for i := range 6 {
 		ch <- i

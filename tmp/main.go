@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	arr := []int{17, 18, 5, 4, 6, 1}
-	fmt.Printf("arr : %v\n",replaceElements(arr))
+	fmt.Printf("arr : %v\n", replaceElements(arr))
 }
 func replaceElements(arr []int) []int {
 	l := len(arr)

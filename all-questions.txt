@@ -25,7 +25,7 @@ Define a custom error type that includes an error code and message. Write a func
 JSON Encoding/Decoding
 Define a struct representing a user (e.g., ID, Name, Email). Write functions to serialize it to JSON and deserialize it back, including error handling for invalid JSON.
 
-HTTP Client with Retries
+HTTP Client with Retries 
 Implement an HTTP GET helper that retries a configurable number of times on temporary network errors, with a small delay between attempts.
 
 Generic Map Function (Go 1.18+)

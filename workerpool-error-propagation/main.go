@@ -56,7 +56,7 @@ func main() {
 	resultArr := make([]int, 0)
 	errArr := make([]error, 0)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 1 * time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 	defer cancel()
 
 	wgWorkers := &sync.WaitGroup{}

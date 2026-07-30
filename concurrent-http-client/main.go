@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"time"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -13,16 +13,12 @@ func main() {
 }
 
 func FetchAll(ctx context.Context, urls []string, maxConcurrency, maxRetries int) (map[string][]byte, error) {
-	   deadline,_ := ctx.Deadline()
+	deadline, _ := ctx.Deadline()
 
-       client := &http.Client{Timeout: time.Until(deadline)}
-       
-	   for i := 0; i < maxConcurrency; i++ {
-		
-	   }
+	client := &http.Client{Timeout: time.Until(deadline)}
 
+	for i := 0; i < maxConcurrency; i++ {
 
+	}
 
-
-       
 }
